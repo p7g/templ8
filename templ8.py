@@ -117,7 +117,7 @@ def compile(template_str, filename="<template>", indentation="    "):
     if indent != 0:
         raise TemplateSyntaxError("Unclosed block")
 
-    code = compile(source="\n".join(lines), filename=filename, mode="exec")
+    code = __import__("builtins").compile(source="\n".join(lines), filename=filename, mode="exec")
     template_globals = {}
     exec(code, template_globals)
     return template_globals["evaluate_template"]
